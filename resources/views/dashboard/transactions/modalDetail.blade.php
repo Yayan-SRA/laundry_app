@@ -103,8 +103,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control"
-                                        value="{{ $transaction->date_complete }}" readonly>
+                                    @if ($transaction->date_complete === null)
+                                        <input type="text" class="form-control" value="Not finished yet" readonly>
+                                    @else
+                                        <input type="text" class="form-control"
+                                            value="{{ $transaction->date_complete }}" readonly>
+                                    @endif
                                     <label>Date Complete</label>
                                 </div>
                             </div>

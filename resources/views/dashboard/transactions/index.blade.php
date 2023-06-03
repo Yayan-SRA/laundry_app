@@ -23,7 +23,7 @@
                         <th>Code</th>
                         <th>Customer</th>
                         <th>Product</th>
-                        <th>Target Complete</th>
+                        {{-- <th>Target Complete</th> --}}
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -34,7 +34,7 @@
                             <td>{{ $transaction->key }}</td>
                             <td>{{ $transaction->customer->name }}</td>
                             <td>{{ $transaction->product }}</td>
-                            <td>{{ $transaction->target_date_complete }}</td>
+                            {{-- <td>{{ $transaction->target_date_complete }}</td> --}}
                             <td>
                                 {{-- <a href="" class="badge bg-info"><span data-feather="eye"></span></a> --}}
                                 <button class="badge bg-info border-0" data-bs-toggle="modal"
@@ -54,7 +54,7 @@
                                     <div class="badge bg-success"><span data-feather="dollar-sign"></span></div>
                                 @else
                                     @if (request('store'))
-                                        <a href="/dashboard/super/cashiers/create?store={{ request('store') }}&search={{ $transaction->customer->name }}"
+                                        <a href="/dashboard/super/cashiers/create?store={{ request('store') }}&search={{ $transaction->key }}"
                                             class="badge bg-danger"><span data-feather="dollar-sign"></span></a>
                                     @else
                                         <a href="/dashboard/cashiers/create?search={{ $transaction->customer->name }}"

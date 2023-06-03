@@ -16,17 +16,23 @@ class Transaction extends Model
 
     public function getCreatedAtAttribute($date)
     {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->translatedFormat('d F Y');
+        if ($date) {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $date)->translatedFormat('d F Y');
+        }
     }
 
     public function getTargetDateCompleteAttribute($date)
     {
-        return Carbon::createFromFormat('Y-m-d', $date)->translatedFormat('d F Y');
+        if ($date) {
+            return Carbon::createFromFormat('Y-m-d', $date)->translatedFormat('d F Y');
+        }
     }
 
     public function getDateCompleteAttribute($date)
     {
-        return Carbon::createFromFormat('Y-m-d', $date)->translatedFormat('d F Y');
+        if ($date) {
+            return Carbon::createFromFormat('Y-m-d', $date)->translatedFormat('d F Y');
+        }
     }
 
     // public function getUpdatedAtAttribute($date)

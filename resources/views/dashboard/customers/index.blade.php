@@ -15,9 +15,10 @@
             <thead>
                 <tr>
                     <th>No.</th>
+                    <th>Code</th>
                     <th>Customer Name</th>
                     <th>Phone Number</th>
-                    <th>Address</th>
+                    {{-- <th>Address</th> --}}
                     <th>Action</th>
                 </tr>
             </thead>
@@ -25,9 +26,10 @@
                 @foreach ($customers as $customer)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+                        <td>{{ $customer->key }}</td>
                         <td>{{ $customer->name }}</td>
                         <td>{{ $customer->phone_number }}</td>
-                        <td>{{ $customer->address }}</td>
+                        {{-- <td>{{ $customer->address }}</td> --}}
                         <td>
                             <a href="" class="badge bg-warning"><span data-feather="edit"></span></a>
                         </td>

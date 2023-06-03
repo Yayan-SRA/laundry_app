@@ -5,7 +5,7 @@
         <h1 class="text-center mb-5">Choose the order type :</h1>
         <div class="row justify-content-center">
             @foreach ($types as $type)
-                <div class="col-md-4">
+                <div class="col-6 col-md-4">
                     <div class="card">
                         @if (request('store'))
                             <a href="/dashboard/super/order/create?store={{ request('store') }}&type={{ $type->name }}">

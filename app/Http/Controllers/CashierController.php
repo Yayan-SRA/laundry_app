@@ -28,11 +28,15 @@ class CashierController extends Controller
     public function create(Request $request)
     {
         $y = Customer::where('name', 'LIKE', '%' . $request->search . '%')->first();
-        $x = Transaction::where([['customer_id', $y->id], ['is_paid', false]])->latest()->first();
+        if (!$y) {
+            $result = Transaction::where([['key', 'LIKE', '%' . $request->search . '%'], ['is_paid', false]])->latest()->first();
+        } else {
+            $result = Transaction::where([['customer_id', $y->id], ['is_paid', false]])->latest()->first();
+        }
         // dd($x);
         return view('dashboard.cashiers.create', [
             'title' => 'Cashier',
-            'transaction' => $x
+            'transaction' => $result
         ]);
     }
 
