@@ -27,7 +27,7 @@ body {
 
 @media (max-width: 767.98px) {
   .sidebar {
-    top: 5rem;
+    top: 0rem;
   }
 }
 
@@ -73,7 +73,7 @@ body {
 
 .navbar .navbar-toggler {
   top: .25rem;
-  right: 1rem;
+  left: 8rem;
 }
 
 .navbar .form-control {
@@ -89,4 +89,8 @@ body {
 .form-control-dark:focus {
   border-color: transparent;
   box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+}
+
+.card-title{
+  font-size: 2vw;
 }

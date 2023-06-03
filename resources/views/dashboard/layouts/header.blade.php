@@ -22,8 +22,8 @@
             </div>
         </form>
     @endcan --}}
-    <button class="navbar-toggler position-static d-md-none collapsed" type="button" data-bs-toggle="collapse"
-        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse"
+        data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false">
         <span class="navbar-toggler-icon"></span>
     </button>
     {{-- <input class="form-control form-control-dark w-100 rounded-0 border-0" type="text" placeholder="Search"
