@@ -12,6 +12,8 @@ use App\Models\Customer;
 use App\Models\Duration;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use App\Exports\TransactionExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 // class p
 // {
@@ -219,5 +221,24 @@ class TransactionController extends Controller
     public function destroy(Transaction $transaction)
     {
         //
+    }
+
+    public function export(Request $request){
+        $start = strtotime($request->start);
+        $end = strtotime($request->end);
+        $startDate =  date('d F Y', $start);
+        $endDate =  date('d F Y', $end);
+
+        // return ([
+        //     $save = Excel::download(new TransactionExport, 'data_transaction.xlsx'),
+        //     $save->awal=$request->awal,
+        //     $save->akhir=$request->akhir,
+        // ]);
+        $export = new TransactionExport([
+            [$request->start],
+            [$request->end]
+        ]);
+    
+        return Excel::download($export, "Transaction data from $startDate to $endDate.xlsx");
     }
 }

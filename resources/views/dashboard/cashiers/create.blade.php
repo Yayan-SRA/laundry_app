@@ -197,9 +197,10 @@
                     <div class="form-floating mb-3">
                         <input type="text"
                             class="form-control @error('change')
-                                is-invalid
+                            is-invalid
                             @enderror"
                             id="change" required value="{{ old('change') }}" name="change" readonly>
+                        <p id="err" class="text-danger" style="margin-left: 1em">Forbidden action</p>
                         <label for="change">Change</label>
                         @error('change')
                             <p class="text-danger">
@@ -222,6 +223,8 @@
         const customerMoney = document.querySelector('#customer_money');
         const change = document.querySelector('#change');
         const income = document.querySelector('#income');
+        const err1 = document.querySelector('#err');
+        err1.hidden = true
         const is_done = document.querySelector('#is_done')
         const save_btn = document.querySelector('#save_btn')
         console.log("coba")
@@ -236,6 +239,10 @@
             change.value = result;
             if (change.value < 0) {
                 save_btn.disabled = true
+                err1.hidden = false
+            } else {
+                save_btn.disabled = false
+                err1.hidden = true
             }
         }
     </script>

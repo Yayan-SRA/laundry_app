@@ -53,6 +53,8 @@ Route::get('/dashboard', function () {
 Route::get('/dashboard/transactions/pre', [TransactionController::class, 'choice'])->middleware('admin');
 Route::resource('/dashboard/customers', CustomerController::class)->middleware('auth');
 Route::resource('/dashboard/products', ProductController::class)->middleware('admin');
+// Route::get('/dashboard/transactions/export', [TransactionController::class, 'export'])->name('transaction.export')->middleware('super');
+Route::post('/dashboard/transactions/export', [TransactionController::class, 'export'])->name('transaction.export')->middleware('super');
 Route::resource('/dashboard/transactions', TransactionController::class)->middleware('auth');
 Route::resource('/dashboard/cashiers', CashierController::class)->middleware('admin');
 Route::get('/price/find', [PriceController::class, 'find']);

@@ -16,7 +16,51 @@
     @endif
     <div class="container">
         <div class="col-md-8 m-auto">
-            <table class="table table-striped table-hover mt-5">
+
+            @if (request('store'))
+                <button type="button" class="btn btn-dark mt-4 mb-1" data-bs-toggle="modal" data-bs-target="#export">
+                    <span data-feather="download" class="mb-1"></span> Export
+                </button>
+            @endif
+            <!-- Modal -->
+            <div class="modal fade" id="export" tabindex="-1" aria-labelledby="exportLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exportLabel">Export Transaction Data</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/dashboard/transactions/export" method="post">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-floating mb-3">
+                                            <input type="date" class="form-control" required id="start"
+                                                name="start">
+                                            <label for="start">Start</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-floating">
+                                            <input type="date" class="form-control" required id="end"
+                                                name="end">
+                                            <label for="end">End</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-dark"><span data-feather="download"
+                                            class="mb-1"></span> Export</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table class="table table-striped table-hover">
                 <thead class="table-dark">
                     <tr>
                         <th>No.</th>
