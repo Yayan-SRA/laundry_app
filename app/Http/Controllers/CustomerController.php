@@ -60,7 +60,7 @@ class CustomerController extends Controller
         // return $request;
         // dd(Str::length($request->phone_number));
         $validatedData = $request->validate([
-            'name' => 'required|unique:users|min:3|max:50',
+            'name' => 'required|unique:customers|min:3|max:50',
             'phone_number' => 'nullable|max:15|min:10|',
             'address' => 'nullable|min:4|max:255',
         ]);
@@ -101,7 +101,19 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
-        //
+        $rules = ([
+            'phone_number' => 'nullable|max:15|min:10|',
+            'address' => 'nullable|min:4|max:255',
+        ]);
+        if ($customer->name != $request->name) {
+            $rules['name'] = 'required|unique:customers|min:3|max:50';
+        }
+        $validatedData = $request->validate($rules);
+        $customer->update($validatedData);
+        if($request->store){
+            return redirect("/dashboard/customers?store=$request->store")->with('success', "Customer data has been updated");
+        }
+        return redirect('/dashboard/customers/')->with('success', "Customer data has been updated");
     }
 
     /**

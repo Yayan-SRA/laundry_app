@@ -9,7 +9,11 @@
             <a href="/dashboard/transactions/pre" class="btn btn-primary">Add New Customer</a>
         @endif
     </div>
-
+    @if (session()->has('success'))
+        <div class="alert alert-success m-auto " role="alert">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="container">
         <table class="table mt-5">
             <thead>
@@ -31,11 +35,19 @@
                         <td>{{ $customer->phone_number }}</td>
                         {{-- <td>{{ $customer->address }}</td> --}}
                         <td>
-                            <a href="" class="badge bg-warning"><span data-feather="edit"></span></a>
+                            <button class="badge bg-info border-0" data-bs-toggle="modal"
+                                data-bs-target="#detail{{ $customer->id }}">
+                                <span data-feather="eye"></span>
+                            </button>
+                            <button class="badge bg-warning border-0" data-bs-toggle="modal"
+                                data-bs-target="#edit{{ $customer->id }}"><span data-feather="edit"></span></button>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
+
+    @include('dashboard.customers.modalDetail')
+    @include('dashboard.customers.modalEdit')
 @endsection
