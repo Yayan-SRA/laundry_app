@@ -57,13 +57,22 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        // return $request;
-        // dd(Str::length($request->phone_number));
+
+        $number = $request->phone_number;
+        if(Str::substr($number, 0, 1) == 0 || Str::substr($number, 0, 2) != 62){
+            if ($request->store && $request->type) {
+                return redirect("dashboard/super/order/create?store=$request->store&type=$request->type")->with('numberFail', "Use 62 format");
+            }
+            return redirect("/dashboard/transactions/create")->with('numberFail', "Use 62 format");
+            // $result = Str::substrReplace($number, "62", 0,1);
+        };
         $validatedData = $request->validate([
             'name' => 'required|unique:customers|min:3|max:50',
-            'phone_number' => 'nullable|max:15|min:10|',
+            'phone_number' => 'required|max:15|min:10|unique:customers',
             'address' => 'nullable|min:4|max:255',
         ]);
+        $number = $request->phone_number;
+        if($request->phone_number)
         if ($request->store && $request->type) {
             $validatedData['store_id'] = Store::where('name', $request->store)->first()->id;
         } else {
@@ -101,12 +110,35 @@ class CustomerController extends Controller
      */
     public function update(Request $request, Customer $customer)
     {
+        $number = $request->phone_number;
+        if(Str::substr($number, 0, 1) == 0 || Str::substr($number, 0, 2) != 62){
+            if ($request->store && $request->type) {
+                return redirect("/dashboard/customers?store=$request->store")->with('numberFail', "Use 62 format");
+            }
+            return redirect("/dashboard/customers/")->with('numberFail', "Use 62 format");
+            // $result = Str::substrReplace($number, "62", 0,1);
+        };
         $rules = ([
-            'phone_number' => 'nullable|max:15|min:10|',
             'address' => 'nullable|min:4|max:255',
         ]);
         if ($customer->name != $request->name) {
             $rules['name'] = 'required|unique:customers|min:3|max:50';
+            if($customer->where('name', $request->name)->first()){
+                if ($request->store && $request->type) {
+                    return redirect("/dashboard/customers?store=$request->store")->with('numberFail', "Name has been taken");
+                }
+                return redirect("/dashboard/customers/")->with('numberFail', "Name has been taken");
+            }
+        }
+        if($customer->phone_number != $request->phone_number){
+            $rules['phone_number'] = 'required|max:15|min:10|unique:customers';
+            // return $customer->where('phone_number', $customer->phone_number)->first();
+            if($customer->where('phone_number', $request->phone_number)->first()){
+                if ($request->store && $request->type) {
+                    return redirect("/dashboard/customers?store=$request->store")->with('numberFail', "Phone number has been taken");
+                }
+                return redirect("/dashboard/customers/")->with('numberFail', "Phone number has been taken");
+            }
         }
         $validatedData = $request->validate($rules);
         $customer->update($validatedData);

@@ -94,13 +94,18 @@
                         class="form-control @error('phone_number')
                                 is-invalid
                                 @enderror"
-                        id="phone_number" value="{{ old('phone_number') }}" name="phone_number">
+                        id="phone_number" required value="{{ old('phone_number') }}" name="phone_number">
                     <label for="phone_number">Phone Number </label>
                     @error('phone_number')
                         <p class="text-danger">
                             {{ $message }}
                         </p>
                     @enderror
+                    @if (session()->has('numberFail'))
+                        <p class="text-danger" style="margin-left:1em">
+                            {{ session('numberFail') }}
+                        </p>
+                    @endif
                 </div>
                 <div class="form-floating mb-3">
                     <textarea type="text"

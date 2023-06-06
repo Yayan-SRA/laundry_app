@@ -14,6 +14,11 @@
             {{ session('success') }}
         </div>
     @endif
+    @if (session()->has('numberFail'))
+        <div class="alert alert-danger m-auto " role="alert">
+            {{ session('numberFail') }}
+        </div>
+    @endif
     <div class="container">
         <table class="table mt-5">
             <thead>

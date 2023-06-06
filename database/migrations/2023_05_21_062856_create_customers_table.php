@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('store_id');
             $table->string('name')->unique();
             $table->text('address')->nullable();
-            $table->string('phone_number')->nullable();;
+            $table->string('phone_number')->unique();
             $table->timestamps();
         });
     }
