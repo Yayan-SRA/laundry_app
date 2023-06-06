@@ -146,7 +146,7 @@ class SuperAdminController extends Controller
         $services = Store::with('services')->where('name', $store)->first()->services->where('type_id', $choosenType->id);
         $durations = Store::with('durations')->where('name', $store)->first()->durations->where('type_id', $choosenType->id);
 
-        $customer = Customer::where([['name', 'LIKE', '%' . $request->search . '%'], ['store_id', $store_id]])->orWhere([['key', 'LIKE', '%' . $request->search . '%'], ['store_id', $store_id]])->first();
+        $customer = Customer::where([['name', 'LIKE', '%' . $request->search . '%'], ['store_id', $store_id]])->orWhere([['key', 'LIKE', '%' . $request->search . '%'], ['store_id', $store_id]])->orWhere([['phone_number', 'LIKE', '%' . $request->search . '%'], ['store_id', $store_id]])->first();
         return view('dashboard.transactions.addTransaction', [
             'title' => 'Add New Order',
             'type' => $choosenType,

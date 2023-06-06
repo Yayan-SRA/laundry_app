@@ -25,13 +25,14 @@
                                     <label>Customer Name</label>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control"
                                         value="{{ $transaction->customer->phone_number }}" readonly>
                                     <label>Phone Number</label>
                                 </div>
                             </div>
+
                             <div class="col-md-12">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control"
@@ -152,6 +153,10 @@
                         </div>
                     </div>
                     <div class="modal-footer">
+                        @if ($transaction->is_done && !$transaction->is_paid)
+                            <a href="https://api.whatsapp.com/send/?phone={{ $transaction->customer->phone_number }}&text=Laundry {{ $transaction->product }} atas nama : {{ $transaction->customer->name }}, sudah siap. Biaya sebesar @rupiah($transaction->total_price)&type=phone_number&app_absent=0"
+                                target="_blank" class="btn btn-success"><span data-feather="send"></span> Chat</a>
+                        @endif
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>

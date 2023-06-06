@@ -33,7 +33,7 @@
                             <input type="hidden" name="author" value="{{ request('author') }}">
                         @endif --}}
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Customer's Name or Code" name="search"
+                <input type="text" class="form-control" placeholder="Name, code or phone number" name="search"
                     value="{{ request('search') }}">
                 <button class="btn btn-primary" type="submit">Search</button>
             </div>
